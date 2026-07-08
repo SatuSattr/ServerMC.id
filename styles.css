@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "MinecraftTen";
+  src: url("./assets/fonts/MinecraftTen.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("./assets/fonts/Minecraft.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-minecraft: "MinecraftTen", sans-serif;
+  --font-minecraft-regular: "Minecraft", sans-serif;
+
+  --color-mc-dark-bg: #272422;
+  --color-mc-dark-more-bg: #1e1d1b;
+  --color-mc-input-bg: #1e1d1b;
+  --color-mc-border: #3c3936;
+
+  --color-mc-green-base: #6ac249;
+  --color-mc-green-dark: #3d8427;
+  --color-mc-green-light: #60c33e;
+
+  --color-mc-gray-base: #aba09c;
+  --color-mc-gray-dark: #6a6462;
+  --color-mc-gray-light: #c2b7b3;
+  --color-mc-gray-hover: #7e7876;
+}
+
+[x-cloak] {
+  display: none !important;
+}
