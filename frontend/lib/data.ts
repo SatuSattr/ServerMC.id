@@ -1,0 +1,96 @@
+import { Server } from "./types";
+
+export const servers: Server[] = [
+  {
+    id: 1,
+    rank: 1,
+    name: "AlwiNation",
+    slug: "alwination",
+    banner:
+      "https://minecraft-mp.com/images/banners/banner-339723-1739705570.mp4",
+    bannerType: "video",
+    logo: "https://minecraft-mp.com/images/favicon/339723.png?ts=1780804305",
+    ip: "alwination.id",
+    players: { online: 887, max: 1888 },
+    votes: "26.2K",
+    ping: 12,
+    description:
+      "Server Minecraft Indonesia dengan konsep casual dan cross-play. Tersedia Earth, Skyblock, SMP Survival dan Vanilla.",
+    tags: ["Survival", "Skyblock", "Earth", "SMP", "Vanilla", "Cross-Play"],
+    version: "1.20 - 26.2",
+  },
+  {
+    id: 2,
+    rank: 2,
+    name: "relxmc",
+    slug: "relxmc",
+    banner:
+      "https://minecraft-mp.com/images/banners/banner-353709-1769624693.mp4",
+    bannerType: "video",
+    logo: "https://minecraft-mp.com/images/favicon/353709.png?ts=1783400479",
+    ip: "relxmc.com",
+    players: { online: 144, max: 1000 },
+    votes: "18.5K",
+    ping: 23,
+    description:
+      "Server dengan fitur Cross-Play, Economy, PvP, Ranks dan Survival. Bergabung dengan komunitas yang aktif!",
+    tags: ["Survival", "Economy", "PvP", "Ranks", "Cross-Play"],
+    version: "1.20 - 26.2",
+  },
+  {
+    id: 3,
+    rank: 3,
+    name: "KandangAlwi",
+    slug: "kandangalwi",
+    banner:
+      "https://minecraft-mp.com/images/banners/banner-287720-1738749575.mp4",
+    bannerType: "video",
+    logo: "https://minecraft-mp.com/images/favicon/287720.png?ts=1780936541",
+    ip: "kalwi.id",
+    players: { online: 180, max: 2026 },
+    votes: "15.8K",
+    ping: null,
+    description:
+      "Server dengan fitur lengkap: Cross-Play, Discord, Economy, Jobs, Land Claim, OneBlock, Ranks, Skyblock dan Survival.",
+    tags: [
+      "Survival",
+      "Skyblock",
+      "OneBlock",
+      "Economy",
+      "Jobs",
+      "Land Claim",
+      "Ranks",
+      "Cross-Play",
+      "Discord",
+    ],
+    version: "1.20 - 26.1.2",
+  },
+  {
+    id: 4,
+    rank: 4,
+    name: "Kaizen Network",
+    slug: "kaizen-network",
+    banner:
+      "https://minecraft-mp.com/images/banners/banner-306253-1776240611.mp4",
+    bannerType: "video",
+    logo: "https://minecraft-mp.com/images/favicon/306253.png?ts=1781362886",
+    ip: "mp.kaizenmc.id",
+    players: { online: 81, max: 6767 },
+    votes: "12.4K",
+    ping: null,
+    description:
+      "Server Minecraft Indonesia yang menghadirkan pengalaman bermain terbaik untuk semua pemain dengan berbagai game mode.",
+    tags: [
+      "Survival",
+      "Skyblock",
+      "Creative",
+      "Roleplay",
+      "Economy",
+      "Land Claim",
+      "PvP",
+      "Cross-Play",
+      "Discord",
+    ],
+    version: "1.20 - 26.2",
+  },
+];
