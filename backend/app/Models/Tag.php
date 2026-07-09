@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    //
+    protected $fillable = ['name', 'slug'];
+
+    public function servers()
+    {
+        return $this->belongsToMany(Server::class, 'server_tags');
+    }
 }
