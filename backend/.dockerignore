@@ -1,0 +1,7 @@
+.git
+.env
+docker-compose.yml
+node_modules/
+tests/
+.phpunit.*
+*.md
