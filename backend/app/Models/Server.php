@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Enums\BannerType;
 use App\Enums\ServerStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Server extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'owner_id', 'name', 'slug', 'java_ip', 'java_port',

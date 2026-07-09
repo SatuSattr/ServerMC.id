@@ -9,6 +9,8 @@ class Gallery extends Model
 {
     use HasUuids;
 
+    protected $table = 'gallery';
+
     protected $fillable = [
         'server_id', 'url', 'caption', 'sort_order',
     ];

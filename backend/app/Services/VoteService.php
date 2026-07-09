@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ServerStatus;
 use App\Http\Responses\ApiResponse;
 use App\Models\Server;
 use App\Models\Vote;
@@ -13,7 +14,7 @@ class VoteService
     public function store(array $data, string $ip): JsonResponse
     {
         $server = Server::with('owner')->find($data['server_id']);
-        if (!$server || $server->status !== 'approved') {
+        if (!$server || $server->status !== ServerStatus::Approved) {
             return ApiResponse::notFound('Server not found');
         }
 
