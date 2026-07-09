@@ -7,17 +7,37 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/pgx/v5"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 
 	"github.com/SatuSattr/server-minecraft.id/backend/internal/config"
 	"github.com/SatuSattr/server-minecraft.id/backend/internal/db"
 	"github.com/SatuSattr/server-minecraft.id/backend/internal/respond"
 )
 
+func runMigrations(databaseURL string) error {
+	m, err := migrate.New("file://migrations", databaseURL)
+	if err != nil {
+		return err
+	}
+	defer m.Close()
+	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+		return err
+	}
+	return nil
+}
+
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatalf("config: %v", err)
 	}
+
+	if err := runMigrations(cfg.DatabaseURL); err != nil {
+		log.Fatalf("migrations: %v", err)
+	}
+	log.Println("migrations: up to date")
 
 	ctx := context.Background()
 	pool, err := db.NewPool(ctx, cfg.DatabaseURL)
