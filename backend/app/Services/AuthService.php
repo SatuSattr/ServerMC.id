@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Responses\ApiResponse;
+use App\Models\VerificationCode;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,16 @@ class AuthService
 {
     public function register(array $data): JsonResponse
     {
+        $verified = VerificationCode::where('email', $data['email'])
+            ->where('code', $data['code'])
+            ->whereNotNull('used_at')
+            ->where('expires_at', '>', now()->subMinutes(10))
+            ->exists();
+
+        if (!$verified) {
+            return ApiResponse::error('EMAIL_NOT_VERIFIED', 'Email belum diverifikasi. Silakan verifikasi terlebih dahulu.', 400);
+        }
+
         $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\VerificationCode;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -22,11 +23,19 @@ class AuthTest extends TestCase
 
     public function test_user_can_register(): void
     {
+        VerificationCode::create([
+            'email' => 'test@example.com',
+            'code' => '123456',
+            'expires_at' => now()->addMinutes(10),
+            'used_at' => now(),
+        ]);
+
         $response = $this->postJson('/api/register', [
             'username' => 'testuser',
             'email' => 'test@example.com',
             'password' => 'password123',
             'turnstile' => 'test-token',
+            'code' => '123456',
         ]);
 
         $response->assertStatus(201)
@@ -67,6 +76,13 @@ class AuthTest extends TestCase
 
     public function test_register_with_duplicate_email(): void
     {
+        VerificationCode::create([
+            'email' => 'other@example.com',
+            'code' => '654321',
+            'expires_at' => now()->addMinutes(10),
+            'used_at' => now(),
+        ]);
+
         User::factory()->create(['email' => 'test@example.com']);
 
         $response = $this->postJson('/api/register', [
@@ -74,6 +90,7 @@ class AuthTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password123',
             'turnstile' => 'test-token',
+            'code' => '654321',
         ]);
 
         $response->assertStatus(422);

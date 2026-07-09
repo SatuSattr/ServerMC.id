@@ -6,15 +6,27 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\ServerController;
 use App\Http\Controllers\Api\ServerStatsController;
+use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\Api\SocialPlatformController;
 use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\Api\VoteController;
 use Illuminate\Support\Facades\Route;
 
+// Verification (email 6-digit code)
+Route::post('/auth/send-code', [VerificationController::class, 'sendCode'])->middleware('throttle:3,10');
+Route::post('/auth/verify-code', [VerificationController::class, 'verifyCode']);
+
 // Auth
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:3,10');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+// Social Auth (Discord OAuth)
+Route::prefix('auth')->group(function () {
+    Route::get('/{provider}/redirect', [SocialAuthController::class, 'redirect']);
+    Route::get('/{provider}/callback', [SocialAuthController::class, 'callback']);
+});
 
 // Servers (public)
 Route::get('/servers', [ServerController::class, 'index']);

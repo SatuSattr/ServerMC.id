@@ -19,6 +19,7 @@ class RegisterRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
             'turnstile' => ['required', 'string', new Turnstile],
+            'code' => ['required', 'string', 'size:6'],
         ];
     }
 }
