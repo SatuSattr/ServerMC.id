@@ -7,6 +7,9 @@ docs/
 # Build output
 dist/
 
+# Superpowers
+.superpowers/
+
 # Go
 server.exe
 
