@@ -1,3 +1,11 @@
+export interface Short {
+  title: string;
+  url: string;
+  thumbnail: string;
+  views: string;
+  serverName: string;
+}
+
 export interface Server {
   id: number;
   rank: number;
@@ -16,4 +24,5 @@ export interface Server {
   description: string;
   tags: string[];
   version: string;
+  shorts: Short[];
 }
