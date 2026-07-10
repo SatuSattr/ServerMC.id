@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siDiscord, siGithub } from "simple-icons";
 
 export default function Footer() {
@@ -8,10 +9,10 @@ export default function Footer() {
     "Server Roleplay",
   ];
   const infoLinks = [
-    "Tentang Kami",
-    "Kebijakan Privasi",
-    "Syarat & Ketentuan",
-    "Kontak",
+    { label: "Tentang Kami", href: "/tentang-kami" },
+    { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
+    { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
+    { label: "Kontak", href: "#" },
   ];
 
   return (
@@ -79,13 +80,13 @@ export default function Footer() {
             <h3 className="text-white font-semibold text-sm mb-4">Informasi</h3>
             <ul className="space-y-2">
               {infoLinks.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
                     className="text-neutral-400 hover:text-mc-green-base text-sm transition-colors"
                   >
-                    {item}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>

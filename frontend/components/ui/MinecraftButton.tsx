@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface MinecraftButtonProps {
   children: ReactNode;
-  variant?: "green" | "gray";
+  variant?: "green" | "gray" | "discord";
   size?: "sm" | "md" | "lg";
   type?: "button" | "submit";
   onClick?: () => void;
@@ -18,6 +18,10 @@ const variantStyles = {
   gray: {
     outer: "bg-mc-gray-base",
     inner: "bg-mc-gray-dark hover:bg-mc-gray-hover",
+  },
+  discord: {
+    outer: "bg-[#3d44c4]",
+    inner: "bg-[#5865F2] hover:bg-[#4752c4]",
   },
 };
 

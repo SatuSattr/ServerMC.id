@@ -1,29 +1,35 @@
 "use client";
 
 import { Heart, Signal, Copy } from "lucide-react";
+import Link from "next/link";
 import { Server } from "@/lib/types";
 import RankBadge from "@/components/ui/RankBadge";
 import TagPill from "@/components/ui/TagPill";
 import PlayerCount from "./PlayerCount";
 import ServerBanner from "./ServerBanner";
+import { useToast } from "@/components/ui/ToastProvider";
 
 interface ServerCardProps {
   server: Server;
+  showRank?: boolean;
+  simpleRank?: boolean;
 }
 
-export default function ServerCard({ server }: ServerCardProps) {
+export default function ServerCard({ server, showRank = true, simpleRank = false }: ServerCardProps) {
+  const { showToast } = useToast();
+
   const copyIP = async (ip: string) => {
     try {
       await navigator.clipboard.writeText(ip);
-      alert(`IP ${ip} berhasil disalin!`);
+      showToast("success", `IP ${ip} berhasil disalin!`);
     } catch {
-      // fallback
+      showToast("error", "Gagal menyalin IP");
     }
   };
 
   return (
-    <div className="bg-mc-input-bg border-[2px] relative border-mc-border overflow-hidden">
-      {server.rank <= 3 && (
+    <Link href={`/server/${server.slug}`} className="block bg-mc-input-bg border-[2px] relative border-mc-border overflow-hidden cursor-pointer hover:border-mc-border/80">
+      {showRank && !simpleRank && server.rank <= 3 && (
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -37,7 +43,7 @@ export default function ServerCard({ server }: ServerCardProps) {
           }}
         />
       )}
-      <RankBadge rank={server.rank} />
+      {showRank && <RankBadge rank={server.rank} plain={simpleRank} />}
       <div className="relative">
         <ServerBanner
           src={server.banner}
@@ -60,7 +66,7 @@ export default function ServerCard({ server }: ServerCardProps) {
           <div className="flex items-center gap-1 shrink-0">
             <span className="text-white text-xs font-mono">{server.ip}</span>
             <button
-              onClick={() => copyIP(server.ip)}
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); copyIP(server.ip); }}
               className="bg-mc-green-base ml-1 h-fit relative"
             >
               <div className="bg-mc-green-dark translate-y-[1px] text-white p-1 cursor-pointer hover:bg-mc-green-base hover:translate-y-0 ease-in-out duration-150 border-b-[1px] border-b-mc-border">
@@ -98,6 +104,6 @@ export default function ServerCard({ server }: ServerCardProps) {
         </div>
         <div className="text-neutral-500 text-[10px]">{server.version}</div>
       </div>
-    </div>
+    </Link>
   );
 }

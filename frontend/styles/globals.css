@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @font-face {
   font-family: "MinecraftTen";
@@ -14,9 +15,24 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSans";
+  src: url("/assets/fonts/NotoSans-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: url("/assets/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
 @theme {
   --font-minecraft: "MinecraftTen", sans-serif;
   --font-minecraft-regular: "Minecraft", sans-serif;
+  --font-sans: "NotoSans", sans-serif;
 
   --color-mc-dark-bg: #272422;
   --color-mc-dark-more-bg: #1e1d1b;
@@ -33,6 +49,35 @@
   --color-mc-gray-hover: #7e7876;
 }
 
+body {
+  font-family: var(--font-sans);
+}
+
 [x-cloak] {
   display: none !important;
+}
+
+.masonry-grid {
+  display: flex;
+  margin-left: -12px;
+  width: auto;
+}
+
+.masonry-grid_column {
+  padding-left: 12px;
+  background-clip: padding-box;
+}
+
+.masonry-grid_column > div {
+  margin-bottom: 12px;
+}
+
+@keyframes toast-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toast-out {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
 }
